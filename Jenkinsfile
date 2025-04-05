@@ -13,25 +13,25 @@ pipeline {
     stages {
         stage("Clone") {
             steps {
-                git branch: "main", url: "https://github.com/kaustubhrprabhu/jenkins-test.git"
+                git branch: "win", url: "https://github.com/kaustubhrprabhu/jenkins-test.git"
             }
         }
 
         stage("Build Docker Image") {
             steps {
-                sh "docker build -t $IMAGE_NAME ."
+                bat "docker build -t $IMAGE_NAME ."
             }
         }
 
         stage("Stop & remove old containers") {
             steps {
-                sh "docker rm -f $CONTAINER_NAME"
+                bat "docker rm -f $CONTAINER_NAME"
             }
         }
 
         stage("Run New Container") {
             steps {
-                sh "docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME"
+                bat "docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME"
             }
         }
     }
