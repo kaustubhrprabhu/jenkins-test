@@ -30,7 +30,7 @@ pipeline {
         }
 
         stage("Run New Container") {
-            step {
+            steps {
                 sh "docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME"
             }
         }
