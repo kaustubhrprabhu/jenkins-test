@@ -1,10 +1,32 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  const [serverData, setServerData] = useState(null);
+
+  const handleClick = async () => {
+    try {
+      const res = await fetch("/api/ping");
+      const data = await res.json();
+
+      if (res.ok) {
+        setServerData(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
-      <h1>This is a simple react js application</h1>
-      <h4>This update is made on April 5, 2025 at 14:28</h4>
+      <div>
+        {serverData ? (
+          <h1>{serverData.message}</h1>
+        ) : (
+          <h1>A Simple React JS Application</h1>
+        )}
+      </div>
+      <button onClick={handleClick}>Ping Server</button>
     </div>
   );
 }
