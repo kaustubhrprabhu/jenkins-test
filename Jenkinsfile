@@ -5,11 +5,6 @@ pipeline {
         githubPush()
     }
 
-    environment {
-        IMAGE_NAME = "simple-reactjs-app"
-        CONTAINER_NAME = "my-react-container"
-    }
-
     stages {
         stage("Clone") {
             steps {
